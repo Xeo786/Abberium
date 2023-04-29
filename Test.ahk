@@ -36,3 +36,12 @@ MenuItem[2].click() ; mouse pointer will be moved to specific element and click 
 NotePad2 := Driver.GetSession(WinExist("*Untitled - Notepad ahk_class Notepad"))
 edit1 := NotePad2.GetElementByClassName("Edit")
 edit1.sendKey("here I re-accessed this")
+
+
+; getting Application source as XML, can be used to get application element structure
+Source := NotePad2.source()
+f := A_ScriptDir "\Source.xml"
+if FileExist(f)
+    FileDelete f
+FileAppend(Source,f)
+run 'chrome.exe "' f '"'
