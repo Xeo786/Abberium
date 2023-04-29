@@ -128,7 +128,7 @@ Class Abb_Session
 {
     __New(D,Address)
     {
-        This.id        := D["id"]
+        This.id        := D["sessionId"]
         This.Address   := Address "/session/" This.id
         if D["value"].HasProp("app")
             This.app   := D["value"]["app"]
