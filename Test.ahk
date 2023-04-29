@@ -32,8 +32,8 @@ msgbox NotePad.DumpElements(MenuItem)
 MenuItem[2].click() ; mouse pointer will be moved to specific element and click will be performed
 
 
-; Re-access window using Hwnd aka toplevel window handle
-NotePad2 := Driver.GetSession(WinExist("*Untitled - Notepad ahk_class Notepad"))
+; Access window using Hwnd aka toplevel window handle
+NotePad2 := Driver.NewHwndSession(WinExist("*Untitled - Notepad ahk_class Notepad"))
 edit1 := NotePad2.GetElementByClassName("Edit")
 edit1.sendKey("here I re-accessed this")
 

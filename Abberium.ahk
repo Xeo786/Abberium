@@ -56,6 +56,8 @@ Class Abberium
 		return Abberium.WebRequest.responseText
 	}
 
+    Sessions() => this.Send( this.address "/sessions")["value"]
+
 	NewSession(App)
 	{
         cap := map(
@@ -68,7 +70,7 @@ Class Abberium
         return Abb_Session(this.Send( this.address "/session","POST",cap,1),this.address)
 	}
 
-    GetSession(WindowHandle)
+    NewHwndSession(WindowHandle)
     {
         cap := map(
             "desiredCapabilities",map(
@@ -80,6 +82,44 @@ Class Abberium
         return Abb_Session(this.Send( this.address "/session","POST",cap,1),this.address)
     }
 
+
+    GetSessionbyAppName(Name)
+    {
+        for k, s in this.Sessions()
+        {
+            if s["capabilities"].HasProp("app")
+            {
+                SplitPath S.Capabilities.app, &FileName
+                if(FileName = Name)
+                    return Abb_Session(s,this.address)
+            }
+        }
+    }
+
+    GetSessionbyLocation(Exe)
+    {
+        for k, s in this.Sessions()
+        {
+            if s["capabilities"].HasProp("app")
+            {
+                if(s["capabilities"]["app"] = Exe)
+                    return Abb_Session(s,this.address)
+            }
+        }
+    }
+
+    GetSessionbyHwnd(Hwnd)
+    {
+        for k, s in x := this.Sessions()
+        {
+            if s["capabilities"].HasProp("appTopLevelWindow")
+            {
+                if(s["capabilities"]["appTopLevelWindow"] = Hwnd)
+                    return Abb_Session(s,this.address)
+            }
+        }
+    }
+
     Status() => this.Send("status")
 	Exit() => this.Driver.close()
 }
@@ -88,7 +128,7 @@ Class Abb_Session
 {
     __New(D,Address)
     {
-        This.id        := D["sessionId"]
+        This.id        := D["id"]
         This.Address   := Address "/session/" This.id
         if D["value"].HasProp("app")
             This.app   := D["value"]["app"]
