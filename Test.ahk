@@ -25,9 +25,12 @@ edit1.sendKey(" abdjkhs")
 msgbox edit1.text()
 
 ; getting all elements with control type Text
-x := NotePad.getElementsbyControlType("Text")
+MenuItem := NotePad.getElementsbyControlType("MenuItem")
 ; dumping element array 
-msgbox NotePad.DumpElements(x)
+msgbox NotePad.DumpElements(MenuItem)
+; MenuItem[2] is file 
+MenuItem[2].click() ; mouse pointer will be moved to specific element and click will be performed
+
 
 ; Re-access window using Hwnd aka toplevel window handle
 NotePad2 := Driver.GetSession(WinExist("*Untitled - Notepad ahk_class Notepad"))
