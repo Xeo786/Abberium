@@ -174,7 +174,7 @@ Class Abb_Element
 			return r
 	}
 
-    Click()                 => this.Send("Click","POST")
+    Click()                 => this.Send("click","POST")
     name()                  => this.Send("name")["value"]
     ;value()                 => this.Send("value")["value"]
     text()                  => this.Send("text")["value"]
