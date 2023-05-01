@@ -1,6 +1,6 @@
 Class AppDriver
 {
-    Static DriverLocation := A_ProgramFiles (A_Is64bitOS ? " (x86)" : "") "\Windows Application Driver\WinAppDriver.exe"
+    Static DriverLocation := A_ProgramFiles  "\Windows Application Driver\WinAppDriver.exe" ; (A_Is64bitOS ? " (x86)" : "")
     Static DriverReleases := "https://github.com/microsoft/WinAppDriver/releases"
 
     __New(Port:=4723)
@@ -56,7 +56,7 @@ Class AppDriver
     static unRegister() => RegWrite( 0, "REG_DWORD", "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock","AllowDevelopmentWithoutDevLicense")
     static ForceRegister()
     {
-        run '*UIAccess "' A_ScriptDir '\ForceRegisterDevMode.ahk"'
+        run A_ScriptDir '\ForceRegisterDevMode.ahk'
         exitapp
     }
 
