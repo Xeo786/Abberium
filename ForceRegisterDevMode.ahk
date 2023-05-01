@@ -22,5 +22,10 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
     ExitApp
 }
 RegWrite( 1, "REG_DWORD", "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock","AllowDevelopmentWithoutDevLicense")
-msgbox "Please restart Abeerium"
+result := RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock","AllowDevelopmentWithoutDevLicense")
+if result = 1
+    msgbox "Please restart Abeerium`n" result
+else
+    msgbox "Failed write into registry please run as Admin following file :`n" A_ScriptFullPath
 
+exitapp
