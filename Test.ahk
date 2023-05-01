@@ -30,7 +30,7 @@ MenuItem := NotePad.getElementsbyControlType("MenuItem")
 msgbox NotePad.DumpElements(MenuItem)
 ; MenuItem[2] is file 
 MenuItem[2].click() ; mouse pointer will be moved to specific element and click will be performed
-
+edit1.Send("value","POST", map("value","esc"))
 
 ; Access window using Hwnd aka toplevel window handle
 NotePad2 := Driver.NewHwndSession(WinExist("*Untitled - Notepad ahk_class Notepad"))
@@ -45,3 +45,4 @@ if FileExist(f)
     FileDelete f
 FileAppend(Source,f)
 run 'chrome.exe "' f '"'
+Driver.exit()
