@@ -21,6 +21,7 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
     }
     ExitApp
 }
+SetRegView(A_PtrSize * 8)
 RegWrite( 1, "REG_DWORD", "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock","AllowDevelopmentWithoutDevLicense")
 result := RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock","AllowDevelopmentWithoutDevLicense")
 if result = 1
